@@ -4,6 +4,10 @@
         "score": 2000
     },
     {
+        "name": "Dave",
+        "score": 2000
+    },
+    {
         "name": "David",
         "score": 1556
     },
@@ -34,9 +38,5 @@
     {
         "name": "William",
         "score": 600
-    },
-    {
-        "name": "Dave",
-        "score": 593
     }
 ]
