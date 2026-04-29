@@ -63,26 +63,21 @@ buttons = {
     "fill": Button(620, 10, 80, 30, "Fill"),
     "text": Button(710, 10, 80, 30, "Text"),
     "clear": Button(800, 10, 80, 30, "Clear"),
+    "eraser": Button(890, 10, 80, 30, "Eraser"),  # ✅ added
 }
 
-# -------- EXTENDED COLORS --------
+# -------- COLORS --------
 colors = [
-    # Row 1
-    (BLACK, pygame.Rect(900, 10, 30, 30)),
-    ((255, 0, 0), pygame.Rect(940, 10, 30, 30)),
-    ((0, 255, 0), pygame.Rect(980, 10, 30, 30)),
-    ((0, 0, 255), pygame.Rect(1020, 10, 30, 30)),
-    ((255, 255, 0), pygame.Rect(1060, 10, 30, 30)),
-    ((255, 165, 0), pygame.Rect(1100, 10, 30, 30)),
-    ((128, 0, 128), pygame.Rect(1140, 10, 30, 30)),
+    (BLACK, pygame.Rect(980, 10, 30, 30)),
+    ((255, 0, 0), pygame.Rect(1020, 10, 30, 30)),
+    ((0, 255, 0), pygame.Rect(1060, 10, 30, 30)),
+    ((0, 0, 255), pygame.Rect(1100, 10, 30, 30)),
+    ((255, 255, 0), pygame.Rect(1140, 10, 30, 30)),
 
-    # Row 2
-    ((0, 255, 255), pygame.Rect(900, 45, 30, 30)),
-    ((255, 192, 203), pygame.Rect(940, 45, 30, 30)),
-    ((165, 42, 42), pygame.Rect(980, 45, 30, 30)),
-    ((128, 128, 128), pygame.Rect(1020, 45, 30, 30)),
-    ((0, 100, 0), pygame.Rect(1060, 45, 30, 30)),
-    ((0, 0, 139), pygame.Rect(1100, 45, 30, 30)),
+    ((0, 255, 255), pygame.Rect(980, 45, 30, 30)),
+    ((255, 192, 203), pygame.Rect(1020, 45, 30, 30)),
+    ((165, 42, 42), pygame.Rect(1060, 45, 30, 30)),
+    ((128, 128, 128), pygame.Rect(1100, 45, 30, 30)),
     ((255, 255, 255), pygame.Rect(1140, 45, 30, 30)),
 ]
 
@@ -184,8 +179,11 @@ while True:
 
         if event.type == pygame.MOUSEMOTION:
 
-            if drawing and mode == "pencil":
-                pygame.draw.line(screen, color, start_pos, event.pos, brush_size)
+            # ✅ pencil + eraser
+            if drawing and mode in ["pencil", "eraser"]:
+                draw_color = WHITE if mode == "eraser" else color
+                draw_size = brush_size * 2 if mode == "eraser" else brush_size
+                pygame.draw.line(screen, draw_color, start_pos, event.pos, draw_size)
                 start_pos = event.pos
 
             if drawing and mode == "line":
